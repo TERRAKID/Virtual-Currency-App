@@ -9,6 +9,7 @@ const usersRouter = require('./routes/users');
 const apiCurrencyRouter = require('./routes/api/v1/currency');
 
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost:27017/currency', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();

@@ -1,0 +1,9 @@
+h1 {
+    @include typo-title;
+    margin: 2em 0em;
+}
+
+a {
+    @include typo-link;
+    text-align: center;
+}

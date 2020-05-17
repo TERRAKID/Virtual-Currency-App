@@ -1,0 +1,32 @@
+$font-header: 'Hind', sans-serif;
+$font-body: 'Open Sans', sans-serif;
+
+@mixin typo-title {
+    font-size: 2.5em;
+    text-align: center;
+    color: $color-text-dark;
+    font-family: $font-header;
+}
+
+@mixin typo-link {
+    display: block;
+    color: $color-secondary;
+    font-family: $font-body;
+    text-decoration: none;
+    font-size: 1.25em;
+
+}
+
+@mixin typo-btn {
+    font-size: 2em;
+    font-family: $font-header;
+    color: $color-text-opacity;
+}
+
+@mixin typo-input {
+    font-family: $font-body;
+    font-weight: bold;
+    color: $color-text-light;
+    font-size: 1.25em;
+}
+

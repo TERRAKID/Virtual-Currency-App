@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "localstart": "./node_modules/.bin/nodemon ./bin/www"
+    "localstart": "./node_modules/.bin/nodemon ./bin/www",
+    "sass": "./node_modules/.bin/sass --watch ./public/sass/app.scss:./public/stylesheets/style.css"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -20,6 +21,7 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sass": "^1.26.5"
   }
 }

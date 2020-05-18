@@ -30,3 +30,9 @@ $font-body: 'Open Sans', sans-serif;
     font-size: 1.25em;
 }
 
+@mixin typo-alert {
+    font-family: $font-body;
+    color: $color-primary;
+    font-size: 1em;
+}
+

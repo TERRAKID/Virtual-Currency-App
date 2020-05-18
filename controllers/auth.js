@@ -1,10 +1,12 @@
 const DefaultUser = require('../models/User');
 
 const signup = async (req, res, next) => {
+    let fistName = req.body.firstname;
+    let lastName = req.body.lastname;
     let username = req.body.username;
     let password = req.body.password;
 
-    const user = new DefaultUser({username: username});
+    const user = new DefaultUser({username: username, firstname: fistName, lastname: lastName, amount: 100});
     await user.setPassword(password);
     await user.save().then(result => {
         res.json({

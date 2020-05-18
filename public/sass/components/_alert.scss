@@ -1,0 +1,25 @@
+.alert {
+    background-color: $color-secondary;
+    background: $color-secondary;
+    border-radius: 6px;
+    border: none;
+    padding: .4em;
+    text-align: center;
+    min-height: 2.4em;
+    margin: 0em 2em;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.alert__text {
+    @include typo-alert;
+}
+
+@media (min-width: 1025px) {
+    .alert {
+        width: 24em;
+        margin: 0em auto;
+    }
+}

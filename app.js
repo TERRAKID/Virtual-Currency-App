@@ -7,6 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiCurrencyRouter = require('./routes/api/v1/currency');
+const passport = require('./passport/passport');
 
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
@@ -28,7 +29,7 @@ app.use('/stylesheets', express.static(__dirname + '/node_modules/normalize.css/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/v1/currency', apiCurrencyRouter);
+app.use('/api/v1/currency', passport.authenticate('jwt', { session: false }), apiCurrencyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

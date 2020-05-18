@@ -27,7 +27,10 @@ btnSignup.addEventListener("click", () => {
             .then(response => response.json())
             .then(result => {
                 if (result.status === 'success') {
-                    alert('You have created an account');
+                    let token = result.data.token;
+                    localStorage.setItem('token', token);
+                    window.location.href = '/';
+
                 } else {
                     alertText.textContent = `Whoops, something went wrong. We couldn't create an account.`;
                     alert.classList.remove('hidden');

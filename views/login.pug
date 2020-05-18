@@ -2,8 +2,11 @@ extends layout
 
 block content
     h1 Welcome to IMD Virtual Currency
+    div(class='alert hidden')
+        span(class='alert__text')
     div(class='form')
-        input(type='email', name='email', placeholder='Email', class='form__input')
-        input(type='password', name='password', placeholder='Password', class='form__input')
-        button(class='btn') Login
+        input(type='email', name='email', placeholder='Email', class='form__input', id='email')
+        input(type='password', name='password', placeholder='Password', class='form__input', id='password')
+        button(class='btn btn--login') Login
     a(href='/signup') No account?
+    script(src='/javascripts/login.js')

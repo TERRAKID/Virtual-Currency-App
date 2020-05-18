@@ -30,9 +30,21 @@ const login = async (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
     await DefaultUser.authenticate()(username, password).then(result => {
-        res.json({
+        if (!result.user) {
+            res.json({
+                status : 'fail',
+                message : 'Login failed'
+            });
+        }
+
+        let token = jwt.sign({
+            uid: result.user._id,
+            username: result.user.username
+        }, 'KcWI4adb6H')
+
+        return res.json({
             status : 'success',
-            data : result
+            data : { 'token' : token }
         })
     }).catch(error => {
         res.json({

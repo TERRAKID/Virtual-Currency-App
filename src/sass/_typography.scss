@@ -14,7 +14,6 @@ $font-body: 'Open Sans', sans-serif;
     font-family: $font-body;
     text-decoration: none;
     font-size: 1.25em;
-
 }
 
 @mixin typo-btn {
@@ -36,3 +35,13 @@ $font-body: 'Open Sans', sans-serif;
     font-size: 1em;
 }
 
+@mixin typo-card {
+    font-family: $font-header;
+    color: $color-text-opacity;
+}
+
+@mixin typo-p {
+    color: $color-text-dark;
+    font-family: $font-body;
+    font-size: 1em;
+}

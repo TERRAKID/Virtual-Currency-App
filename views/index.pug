@@ -6,22 +6,37 @@ block content
       img(src='/images/logout.svg', alt='Logout')
     a(href='/leaderboard', class='btn btn--navbar')
       img(src='/images/leaderboard.svg', alt='Leaderboard')
-  div
-    p Nice to see you again!
-    div
-      img(src="", alt="")
-      h5 Username
+  div(class='card')
+    p(class='card__welcome') Nice to see you again!
+    div(class='card__info')
+      img(src="/images/profile.jpeg", alt="Profile picture", class='card__img')
+      h5 username
       h4 Rank: 
         span 116
-      div
+      div(class='card__line')
       h3
-        span 22
+        span 1122
         |  coins
-  div
-    h6 Today
-    div
-      img(src="", alt="")
-      p Username
-      p Design help
-  a(href="") +
+  div(class='history')
+    div(class='history__transfer')
+      img(src="/images/profile.jpeg", alt="Profile picture", class='history__img')
+      p(class="history__name") Username
+      p(class="history__reason") Design help
+      p(class="history__amount history__amount--pos") +3
+    div(class='history__transfer')
+      img(src="/images/profile.jpeg", alt="Profile picture", class='history__img')
+      p(class="history__name") Username
+      p(class="history__reason") Design help
+      p(class="history__amount history__amount--neg") -3
+    div(class='history__transfer')
+      img(src="/images/profile.jpeg", alt="Profile picture", class='history__img')
+      p(class="history__name") Username
+      p(class="history__reason") Design help
+      p(class="history__amount history__amount--neg") -3
+    div(class='history__transfer')
+      img(src="/images/profile.jpeg", alt="Profile picture", class='history__img')
+      p(class="history__name") Username
+      p(class="history__reason") Design help
+      p(class="history__amount history__amount--neg") -3
+  a(href="/transfer", class='btn btn--transfer') +
   script(src='/javascripts/index.js')

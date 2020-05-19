@@ -7,3 +7,27 @@ a {
     @include typo-link;
     text-align: center;
 }
+
+h5 {
+    @include typo-card;
+    font-size: 1.25em;
+    margin: 0em 3.4em;
+}
+
+h4 {
+    @include typo-card;
+    //font-size: 1.50em;
+    margin: .5em 4.25em;
+    margin-right: 0em;
+}
+
+h3 {
+    @include typo-card;
+    font-size: 2.5em;
+    margin: .75em 0em;
+    margin-bottom: .2em;
+}
+
+p {
+    @include typo-p
+}

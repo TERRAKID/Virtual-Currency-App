@@ -39,6 +39,5 @@ watchtask = () => {
 
 exports.default = series(
     parallel(sass2css, minifyjs, minifyimage),
-    startnodemon,
-    watchtask
+    parallel(startnodemon, watchtask)
 )

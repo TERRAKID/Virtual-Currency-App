@@ -1,6 +1,27 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  nav(class='navbar')
+    button(class='btn btn--navbar btn--logout')
+      img(src='/images/logout.svg', alt='Logout')
+    a(href='/leaderboard', class='btn btn--navbar')
+      img(src='/images/leaderboard.svg', alt='Leaderboard')
+  div
+    p Nice to see you again!
+    div
+      img(src="", alt="")
+      h5 Username
+      h4 Rank: 
+        span 116
+      div
+      h3
+        span 22
+        |  coins
+  div
+    h6 Today
+    div
+      img(src="", alt="")
+      p Username
+      p Design help
+  a(href="") +
   script(src='/javascripts/index.js')

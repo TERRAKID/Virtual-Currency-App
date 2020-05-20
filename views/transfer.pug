@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    nav(class='navbar')
+        a(href='/', class='btn btn--navbar btn--back')
+        h1(class='navbar__title') Transfer
+        a(href='/leaderboard', class='btn btn--navbar btn--leaderboard')
+    div(class='form')
+        input(type='text', name='to', placeholder='To', class='form__input', id='to')
+        input(type='number', name='amount', placeholder='Amount', class='form__input', min='1', id='amount')
+        select(name='reason', class='form__input input--select', id='reason')
+            option(value='1') Development help
+            option(value='2') Design help
+            option(value='3') Feedback
+            option(value='4') Meeting deadlines
+            option(value='5') Other
+        input(type='text', name='message', placeholder='Message', class='form__input', id='message')
+        input(type='password', name='password', placeholder='Password', class='form__input', id='password')
+        button(class='btn btn--big btn--confirm') Confirm
+    script(src='/javascripts/transfer.js')

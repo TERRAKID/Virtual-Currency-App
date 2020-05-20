@@ -23,6 +23,10 @@
     color: $color-text-light;
 }
 
+.input--select {
+    background-color: $color-primary;
+}
+
 @media (min-width: 1025px) {
     .form {
         width: 23em;

@@ -17,6 +17,8 @@
 .btn--navbar {
     align-items: center;
     background: none;
+    width: 32px;
+    height: 32px;
 }
 
 .btn--transfer {
@@ -28,6 +30,21 @@
     left: 75%;
     bottom: 1em;
     padding-bottom: .1em;
+}
+
+.btn--back {
+    background-image: url('/images/back.svg');
+    background-size: cover;
+}
+
+.btn--leaderboard {
+    background-image: url('/images/leaderboard.svg');
+    background-size: cover;
+}
+
+.btn--logout {
+    background-image: url('/images/logout.svg');
+    background-size: cover;
 }
 
 @media (min-width: 1025px) {

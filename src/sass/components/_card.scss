@@ -17,13 +17,13 @@
     height: 87px;
     object-fit: cover;
     position: absolute;
-    top: 80px;
+    top: 70px;
 }
 
 .card__welcome {
     position: absolute;
     left: 123px;
-    top: 4em;
+    top: 3.5em;
 }
 
 @media (min-width: 1025px) {
@@ -34,10 +34,10 @@
 
     .card__welcome {
         position: relative;
-        margin-bottom: 4.5em;
+        margin-bottom: 4em;
     }
 
     .card__img {
-        top: 154px;
+        top: 134px;
     }
 }

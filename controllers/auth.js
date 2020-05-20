@@ -1,5 +1,6 @@
 const DefaultUser = require('../models/User');
 const jwt = require('jsonwebtoken');
+const config = require('config');
 
 const signup = async (req, res, next) => {
     let fistName = req.body.firstname;
@@ -13,7 +14,7 @@ const signup = async (req, res, next) => {
         let token = jwt.sign({
             uid: result._id,
             username: result.username
-        }, 'KcWI4adb6H')
+        }, config.get('Jwt.secret'))
         res.json({
             status : 'success',
             data : { 'token' : token }
@@ -40,7 +41,7 @@ const login = async (req, res, next) => {
         let token = jwt.sign({
             uid: result.user._id,
             username: result.user.username
-        }, 'KcWI4adb6H')
+        }, config.get('Jwt.secret'))
 
         return res.json({
             status : 'success',

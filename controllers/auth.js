@@ -14,7 +14,7 @@ const signup = async (req, res, next) => {
         let token = jwt.sign({
             uid: result._id,
             username: result.username
-        }, config.get('Jwt.secret'))
+        }, process.env.dbconn || config.get('Jwt.secret'))
         res.json({
             status : 'success',
             data : { 'token' : token }
@@ -41,7 +41,7 @@ const login = async (req, res, next) => {
         let token = jwt.sign({
             uid: result.user._id,
             username: result.user.username
-        }, config.get('Jwt.secret'))
+        }, process.env.dbconn || config.get('Jwt.secret'))
 
         return res.json({
             status : 'success',

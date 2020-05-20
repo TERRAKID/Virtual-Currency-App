@@ -27,7 +27,7 @@ minifyimage = () => {
 startnodemon = ('start', (done) => {
     nodemon({
       script: './bin/www'
-    , ext: 'js pug scss'
+    , ext: 'js pug scss json'
     , env: { 'NODE_ENV': 'development' }
     , done: done
     })

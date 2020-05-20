@@ -1,40 +1,59 @@
 const Currency = require('../../../models/Currency');
+const DefaultUser = require('../../../models/User');
 
-//also update user amount .then??
-const addCurrency = (req, res) => {
-    let currency = new Currency();
-    currency.amount = req.body.amount;
-    currency.to = req.body.to;
-    currency.from = req.body.from;
-    currency.reason = req.body.reason;
-    currency.message = req.body.message;
-    currency.save((err, doc) => {
-        if (!err) {
-            res.json({
-                status : 'success',
-                data : { 'currency' : doc }
-            });
-        } else {
-            res.json({
-                status : 'error',
-                message : 'Unable to add a transfer'
-            });
-        }
-    });
+const addTransfer = (req, res) => {
+    if ((req.user.amount - req.body.amount) >= 0) {
+        let currency = new Currency();
+        currency.amount = req.body.amount;
+        currency.to = req.body.to;
+        currency.from = req.user.username;
+        currency.reason = req.body.reason;
+        currency.message = req.body.message;
+        currency.save((err, doc) => {
+            if (!err) {
+                res.json({
+                    status: 'success',
+                    data: {
+                        'currency': doc
+                    }
+                });
+            } else {
+                res.json({
+                    status: 'error',
+                    message: 'Unable to add a transfer'
+                });
+            }
+        });
+    } else {
+        res.json({
+            status: 'error',
+            message: 'Unable to add a transfer'
+        });
+    }
 }
 
 const getCurrency = (req, res) => {
     let user = req.body.user;
-    Currency.find({ $or:[ {to: user}, {from: user} ]}).sort({createdAt: 'desc'}).exec( (err, doc) => {
+    Currency.find({
+        $or: [{
+            to: user
+        }, {
+            from: user
+        }]
+    }).sort({
+        createdAt: 'desc'
+    }).exec((err, doc) => {
         if (!err) {
             res.json({
-                status : 'success',
-                data : { 'currency' : doc }
+                status: 'success',
+                data: {
+                    'currency': doc
+                }
             });
         } else {
             res.json({
-                status : 'error',
-                message : 'Unable to find a transfer'
+                status: 'error',
+                message: 'Unable to find a transfer'
             });
         }
     });
@@ -45,13 +64,15 @@ const getCurrencyId = (req, res) => {
     Currency.findById(id, (err, doc) => {
         if (!err) {
             res.json({
-                status : 'success',
-                data : { 'currency' : doc }
+                status: 'success',
+                data: {
+                    'currency': doc
+                }
             });
         } else {
             res.json({
-                status : 'error',
-                message : 'Unable to find a transfer'
+                status: 'error',
+                message: 'Unable to find a transfer'
             });
         }
     });
@@ -60,17 +81,78 @@ const getCurrencyId = (req, res) => {
 //move to user?
 const getLeaderboard = (req, res) => {
     res.json({
-        status : 'success',
-        data : {
-            'currency' : [
-                { 'id' : 1, 'username' : 'Jens', 'amount' : 123 },
-                { 'id' : 2, 'username' : 'Mathilde', 'amount' : 321 }
+        status: 'success',
+        data: {
+            'currency': [{
+                    'id': 1,
+                    'username': 'Jens',
+                    'amount': 123
+                },
+                {
+                    'id': 2,
+                    'username': 'Mathilde',
+                    'amount': 321
+                }
             ]
         }
     });
 }
 
-module.exports.addCurrency = addCurrency;
+const deductCurrency = (req, res) => {
+    let amount = 0 - req.body.amount;
+    let username = req.user.username;
+    DefaultUser.findOneAndUpdate({
+        "username": username
+    }, {
+        "$inc": {
+            "amount": amount
+        }
+    }, (err, doc) => {
+        if (!err) {
+            res.json({
+                status: "success",
+                data: {
+                    "currency": doc
+                }
+            });
+        } else {
+            res.json({
+                status: "error",
+                message: "Unable to update"
+            });
+        }
+    })
+}
+
+const addCurrency = (req, res) => {
+    let amount = req.body.amount;
+    let username = req.body.to;
+    DefaultUser.findOneAndUpdate({
+        "username": username
+    }, {
+        "$inc": {
+            "amount": amount
+        }
+    }, (err, doc) => {
+        if (!err) {
+            res.json({
+                status: "success",
+                data: {
+                    "currency": doc
+                }
+            });
+        } else {
+            res.json({
+                status: "error",
+                message: "Unable to update"
+            });
+        }
+    })
+}
+
+module.exports.addTransfer = addTransfer;
 module.exports.getCurrency = getCurrency;
 module.exports.getCurrencyId = getCurrencyId;
 module.exports.getLeaderboard = getLeaderboard;
+module.exports.deductCurrency = deductCurrency;
+module.exports.addCurrency = addCurrency;

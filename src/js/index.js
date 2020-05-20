@@ -1,4 +1,4 @@
-const baseUrl = process.env.url || 'http://localhost:3000';
+const baseUrl = window.location.protocol + "//" + window.location.host;
 const btnLogout = document.querySelector('.btn--logout');
 
 fetch(baseUrl + '/api/v1/currency/transfers', {

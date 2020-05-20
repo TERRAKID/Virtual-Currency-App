@@ -1,4 +1,4 @@
-const baseUrl = process.env.url || 'http://localhost:3000';
+const baseUrl = window.location.protocol + "//" + window.location.host;
 const subString = '@student.thomasmore.be';
 const btnSignup = document.querySelector('.btn--signup');
 const alert = document.querySelector('.alert');

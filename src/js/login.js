@@ -1,4 +1,4 @@
-const baseUrl = process.env.url || 'http://localhost:3000';
+const baseUrl = window.location.protocol + "//" + window.location.host;
 const btnLogin = document.querySelector('.btn--login');
 const alert = document.querySelector('.alert');
 const alertText = document.querySelector('.alert__text');

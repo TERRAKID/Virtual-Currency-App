@@ -1,4 +1,4 @@
-const baseUrl = process.env.url || 'http://localhost:3000';
+const baseUrl = window.location.protocol + "//" + window.location.host;
 let btnConfirm = document.querySelector('.btn--confirm');
 
 fetch(baseUrl + '/api/v1/currency/transfers', {

@@ -8,5 +8,6 @@ router.get('/transfers/:id', currencyController.getCurrencyId);
 router.get('/leaderboard', currencyController.getLeaderboard);
 router.post('/deductcurrency', currencyController.deductCurrency);
 router.post('/addcurrency', currencyController.addCurrency);
+router.get('/current', currencyController.current);
 
 module.exports = router;

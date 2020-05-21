@@ -1,15 +1,21 @@
 const baseUrl = window.location.protocol + "//" + window.location.host;
 const btnLogout = document.querySelector('.btn--logout');
 
-fetch(baseUrl + '/api/v1/currency/transfers', {
+fetch(baseUrl + '/api/v1/currency/current', {
+    method: 'GET',
     headers: {
+        'Content-Type': 'application/json',
         'Authorization' : 'Bearer ' + localStorage.getItem('token')
     }
 })
-.then(response => response.json())
-.then(result => {})
+.then(response => {
+    return response.json();
+}).then(result => {
+    document.querySelector(".card__name").innerHTML = result.data.user.firstname + ' ' + result.data.user.lastname;
+    document.querySelector(".card__amount").innerHTML = result.data.user.amount;
+})
 .catch(error => {
-    logout();
+    console.log(error);
 });
 
 logout = () => {

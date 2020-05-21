@@ -150,9 +150,29 @@ const addCurrency = (req, res) => {
     })
 }
 
+const current = (req, res) => {
+    let username = req.user.username;
+    DefaultUser.findOne({'username': username}, (err, doc) => {
+        if (!err) {
+            res.json({
+                status: 'success',
+                data: {
+                    "user": doc 
+                }
+            });
+        } else {
+            res.json({
+                status: 'error',
+                message: 'Unable to find user'
+            });
+        }
+    });
+}
+
 module.exports.addTransfer = addTransfer;
 module.exports.getCurrency = getCurrency;
 module.exports.getCurrencyId = getCurrencyId;
 module.exports.getLeaderboard = getLeaderboard;
 module.exports.deductCurrency = deductCurrency;
 module.exports.addCurrency = addCurrency;
+module.exports.current = current;

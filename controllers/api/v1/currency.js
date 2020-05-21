@@ -33,7 +33,7 @@ const addTransfer = (req, res) => {
 }
 
 const getCurrency = (req, res) => {
-    let user = req.body.user;
+    let user = req.user.username;
     Currency.find({
         $or: [{
             to: user
@@ -169,6 +169,25 @@ const current = (req, res) => {
     });
 }
 
+const currentUsername = (req, res) => {
+    let username = req.params.username;
+    DefaultUser.findOne({'username': username}, (err, doc) => {
+        if (!err) {
+            res.json({
+                status: 'success',
+                data: {
+                    "user": doc 
+                }
+            });
+        } else {
+            res.json({
+                status: 'error',
+                message: 'Unable to find user'
+            });
+        }
+    });
+}
+
 module.exports.addTransfer = addTransfer;
 module.exports.getCurrency = getCurrency;
 module.exports.getCurrencyId = getCurrencyId;
@@ -176,3 +195,4 @@ module.exports.getLeaderboard = getLeaderboard;
 module.exports.deductCurrency = deductCurrency;
 module.exports.addCurrency = addCurrency;
 module.exports.current = current;
+module.exports.currentUsername = currentUsername;

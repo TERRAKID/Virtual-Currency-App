@@ -9,5 +9,6 @@ router.get('/leaderboard', currencyController.getLeaderboard);
 router.post('/deductcurrency', currencyController.deductCurrency);
 router.post('/addcurrency', currencyController.addCurrency);
 router.get('/current', currencyController.current);
+router.get('/current/:username', currencyController.currentUsername);
 
 module.exports = router;

@@ -13,6 +13,7 @@ primus = Primus.connect(baseUrl, {
 primus.on('data', (json) => {
     if (json.action === "showCurrency") {
         prependCurrency(json.data.currency);
+        updateAmount(json.data.currency);
     }
 })
 
@@ -168,6 +169,10 @@ prependCurrency = (currency) => {
     container.append(amount);
 
     document.querySelector(".history").prepend(container);
+}
+
+updateAmount = (currency) => {
+    document.querySelector(".card__amount").innerHTML = parseInt(document.querySelector(".card__amount").innerHTML) + currency.amount;
 }
 
 logout = () => {

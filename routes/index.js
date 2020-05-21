@@ -18,4 +18,8 @@ router.get('/transfer', function(req, res, next) {
   res.render('transfer');
 });
 
+router.get('/leaderboard', function(req, res, next) {
+  res.render('leaderboard');
+});
+
 module.exports = router;

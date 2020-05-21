@@ -1,0 +1,1 @@
+const baseUrl=window.location.protocol+"//"+window.location.host;fetch(baseUrl+"/api/v1/currency/transfers",{headers:{Authorization:"Bearer "+localStorage.getItem("token")}}).then(o=>o.json()).then(o=>{}).catch(o=>{logout()}),logout=()=>{localStorage.removeItem("token"),window.location.href="/login"};

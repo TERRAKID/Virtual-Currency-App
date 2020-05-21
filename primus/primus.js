@@ -3,7 +3,10 @@ const Primus = require("primus")
 let go = (server) => {
     let primus = new Primus(server, {/* options */});
     primus.on('connection', (spark) => {
-        console.log('🔥');
+
+        spark.on('data', (data) => {
+            primus.write(data);
+        });
     })
 }
 

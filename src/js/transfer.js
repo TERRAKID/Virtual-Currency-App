@@ -1,6 +1,14 @@
 const baseUrl = window.location.protocol + "//" + window.location.host;
 let btnConfirm = document.querySelector('.btn--confirm');
 
+primus = Primus.connect(baseUrl, {
+    reconnect: {
+        max: Infinity // Number: The max delay before we try to reconnect.
+      , min: 500 // Number: The minimum delay before we try reconnect.
+      , retries: 10 // Number: How many times we should try to reconnect.
+    }
+  });
+
 fetch(baseUrl + '/api/v1/currency/transfers', {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -39,6 +47,10 @@ btnConfirm.addEventListener('click', () => {
         .then(response => response.json())
         .then(result => {
             if (result.status === 'success') {
+                primus.write({
+                    "action": "showCurrency",
+                    "data": result.data
+                  });
                 deductCurrency(to, amount, reason, message);
             }
         })

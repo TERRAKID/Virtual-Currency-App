@@ -2,7 +2,7 @@ const Currency = require('../../../models/Currency');
 const DefaultUser = require('../../../models/User');
 
 const addTransfer = (req, res) => {
-    if (((req.user.amount - req.body.amount) >= 0) && (req.body.amount - Math.floor(req.body.amount)) === 0) {
+    if (((req.user.amount - req.body.amount) >= 0) && ((req.body.amount - Math.floor(req.body.amount)) === 0) && (req.body.to !== req.user.username)) {
         let currency = new Currency();
         currency.amount = req.body.amount;
         currency.to = req.body.to;

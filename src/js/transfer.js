@@ -32,8 +32,8 @@ btnConfirm.addEventListener('click', () => {
 
     let to;
 
-    if (users.find(x => x.label === document.querySelector('#to').value)) {
-        to = users.find(x => x.label).value;
+    if (users.find(x => x.label === document.querySelector('#to').value).label === document.querySelector('#to').value) {
+        to = users.find(x => x.label === document.querySelector('#to').value).value;
     }
 
     let amount = document.querySelector('#amount').value;

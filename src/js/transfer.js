@@ -1,5 +1,7 @@
 const baseUrl = window.location.protocol + "//" + window.location.host;
 let btnConfirm = document.querySelector('.btn--confirm');
+const alert = document.querySelector('.alert');
+const alertText = document.querySelector('.alert__text');
 
 primus = Primus.connect(baseUrl, {
     reconnect: {
@@ -52,6 +54,9 @@ btnConfirm.addEventListener('click', () => {
                     "data": result.data
                   });
                 deductCurrency(to, amount, reason, message);
+            } else {
+                alertText.textContent = `Whoops, something went wrong. We were unable to transfer the coins.`;
+                alert.classList.remove('hidden');
             }
         })
         .catch(error => {

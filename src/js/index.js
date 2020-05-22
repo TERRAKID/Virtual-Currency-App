@@ -1,6 +1,8 @@
 const baseUrl = window.location.protocol + "//" + window.location.host;
 const btnLogout = document.querySelector('.btn--logout');
 let user;
+let userId;
+let placeNumber = 1;
 
 primus = Primus.connect(baseUrl, {
     reconnect: {
@@ -31,6 +33,7 @@ fetch(baseUrl + '/api/v1/currency/current', {
     document.querySelector(".card__amount").innerHTML = result.data.user.amount;
 
     user = result.data.user.username;
+    userId = result.data.user._id;
 })
 .catch(error => {
     console.log(error);
@@ -173,6 +176,30 @@ prependCurrency = (currency) => {
     if (transferLength > 5) {
         document.querySelector(".history").removeChild(document.querySelector(".history").lastChild);
     }
+}
+
+fetch(baseUrl + '/api/v1/currency/leaderboard', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + localStorage.getItem('token')
+    }
+})
+.then(response => response.json())
+.then(result => {
+    result.data.currency.forEach(currency => {
+        showRank(currency);
+    });
+})
+.catch(error => {
+    logout();
+});
+
+let showRank = (currency) => {
+    if (currency._id === userId) {
+        document.querySelector('.card__rank').innerHTML = placeNumber;
+    }
+    placeNumber++;
 }
 
 updateAmount = (currency) => {

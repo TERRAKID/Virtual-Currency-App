@@ -45,6 +45,10 @@
     font-size: .75em;
 }
 
+.leaderboard__person--current {
+    background-color: $color-secondary;
+}
+
 @media (min-width: 1025px) {
     .leaderboard__person {
         width: 23em;

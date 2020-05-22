@@ -1,5 +1,22 @@
 const baseUrl = window.location.protocol + "//" + window.location.host;
 let placeNumber = 1;
+let userId;
+
+fetch(baseUrl + '/api/v1/currency/current', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + localStorage.getItem('token')
+    }
+})
+.then(response => {
+    return response.json();
+}).then(result => {
+    userId = result.data.user._id;
+})
+.catch(error => {
+    logout();
+});
 
 fetch(baseUrl + '/api/v1/currency/leaderboard', {
     method: 'GET',
@@ -25,7 +42,12 @@ let showLeaderboard = (currency) => {
     let name = document.createElement("p");
     let amount = document.createElement("p");
 
-    container.setAttribute("class", "leaderboard__person");
+    if (currency._id === userId) {
+        container.setAttribute("class", "leaderboard__person leaderboard__person--current")
+    } else {
+        container.setAttribute("class", "leaderboard__person");
+    }
+
     place.setAttribute("class", "leaderboard__place");
     img.setAttribute("src", "/images/profile.jpeg");
     img.setAttribute("alt", "Profile picture");

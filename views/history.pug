@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    nav(class='navbar')
+        a(href='/', class='btn btn--navbar btn--back')
+        h1(class='navbar__title') Transaction history
+        a(href='/leaderboard', class='btn btn--navbar btn--leaderboard')
+    div(class='history')
+    script(src='/primus/primus.js')
+    script(src='/javascripts/history.js')

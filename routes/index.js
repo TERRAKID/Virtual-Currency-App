@@ -22,4 +22,8 @@ router.get('/leaderboard', function(req, res, next) {
   res.render('leaderboard');
 });
 
+router.get('/transfer/history', function(req, res, next) {
+  res.render('history');
+});
+
 module.exports = router;

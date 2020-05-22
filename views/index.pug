@@ -13,10 +13,11 @@ block content
       h4 Rank: 
         span 116
       div(class='card__line')
-      h3
+      h3(class='card__coins')
         span(class="card__amount")
         |  coins
   div(class='history')
-  a(href="/transfer", class='btn btn--transfer') +
+  a(href='/transfer/history') Show transaction history
+  a(href='/transfer', class='btn btn--transfer') +
   script(src='/primus/primus.js')
   script(src='/javascripts/index.js')

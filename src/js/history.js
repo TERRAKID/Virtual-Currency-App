@@ -1,5 +1,4 @@
 const baseUrl = window.location.protocol + "//" + window.location.host;
-const btnLogout = document.querySelector('.btn--logout');
 let user;
 
 primus = Primus.connect(baseUrl, {
@@ -13,7 +12,6 @@ primus = Primus.connect(baseUrl, {
 primus.on('data', (json) => {
     if (json.action === "showCurrency") {
         prependCurrency(json.data.currency);
-        updateAmount(json.data.currency);
     }
 })
 
@@ -27,9 +25,6 @@ fetch(baseUrl + '/api/v1/currency/current', {
 .then(response => {
     return response.json();
 }).then(result => {
-    document.querySelector(".card__name").innerHTML = result.data.user.firstname + ' ' + result.data.user.lastname;
-    document.querySelector(".card__amount").innerHTML = result.data.user.amount;
-
     user = result.data.user.username;
 })
 .catch(error => {
@@ -46,7 +41,7 @@ fetch(baseUrl + '/api/v1/currency/transfers', {
     }).then(result => {
     return result.json();
 }).then(json => {
-    json.data.currency.slice(0, 5).forEach(currency => {
+    json.data.currency.forEach(currency => {
         showCurrency(currency);
     });
 }).catch(error => {
@@ -79,6 +74,7 @@ let showCurrency = (currency) => {
     let name = document.createElement("p");
     let reason = document.createElement("p");
     let amount = document.createElement("p");
+    let message = document.createElement("p");
 
     container.setAttribute("class", "history__transfer");
     img.setAttribute("src", "/images/profile.jpeg");
@@ -86,6 +82,7 @@ let showCurrency = (currency) => {
     img.setAttribute("class", "history__img");
     name.setAttribute("class", "history__name");
     reason.setAttribute("class", "history__reason");
+    message.setAttribute("class", "history__message")
 
     if (user !== currency.to) {
         amount.setAttribute("class", "history__amount history__amount--neg");
@@ -114,10 +111,13 @@ let showCurrency = (currency) => {
             reason.innerHTML = 'Other';
     }
 
+    message.innerHTML = currency.message;
+
     container.append(img);
     container.append(name);
     container.append(reason);
     container.append(amount);
+    container.append(message);
 
     document.querySelector(".history").append(container);
 }
@@ -128,6 +128,7 @@ prependCurrency = (currency) => {
     let name = document.createElement("p");
     let reason = document.createElement("p");
     let amount = document.createElement("p");
+    let message = document.createElement("p");
 
     container.setAttribute("class", "history__transfer");
     img.setAttribute("src", "/images/profile.jpeg");
@@ -135,6 +136,7 @@ prependCurrency = (currency) => {
     img.setAttribute("class", "history__img");
     name.setAttribute("class", "history__name");
     reason.setAttribute("class", "history__reason");
+    message.setAttribute("class", "history__message")
 
     if (user !== currency.to) {
         amount.setAttribute("class", "history__amount history__amount--neg");
@@ -163,27 +165,18 @@ prependCurrency = (currency) => {
             reason.innerHTML = 'Other';
     }
 
+    message.innerHTML = currency.message;
+
     container.append(img);
     container.append(name);
     container.append(reason);
     container.append(amount);
+    container.append(message);
 
     document.querySelector(".history").prepend(container);
-    let transferLength = document.querySelectorAll(".history__transfer").length;
-    if (transferLength > 5) {
-        document.querySelector(".history").removeChild(document.querySelector(".history").lastChild);
-    }
-}
-
-updateAmount = (currency) => {
-    document.querySelector(".card__amount").innerHTML = parseInt(document.querySelector(".card__amount").innerHTML) + currency.amount;
 }
 
 logout = () => {
     localStorage.removeItem('token');
     window.location.href = '/login';
 }
-
-btnLogout.addEventListener('click', () => {
-    logout();
-})

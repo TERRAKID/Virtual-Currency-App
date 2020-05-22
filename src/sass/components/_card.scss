@@ -26,6 +26,20 @@
     top: 4.1em;
 }
 
+.card__coins {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card__name {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 @media (min-width: 1025px) {
     .card {
         width: 23em;

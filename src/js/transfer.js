@@ -2,6 +2,8 @@ const baseUrl = window.location.protocol + "//" + window.location.host;
 let btnConfirm = document.querySelector('.btn--confirm');
 const alert = document.querySelector('.alert');
 const alertText = document.querySelector('.alert__text');
+let users = [];
+let toUser;
 
 primus = Primus.connect(baseUrl, {
     reconnect: {
@@ -28,7 +30,17 @@ logout = () => {
 }
 
 btnConfirm.addEventListener('click', () => {
-    let to = document.querySelector('#to').value;
+
+    let to;
+
+    if (users.find(x => x.label === document.querySelector('#to').value)) {
+        to = users.find(x => x.label).value;
+    }
+
+    if (toUser != null){
+        to = toUser;
+    }
+
     let amount = document.querySelector('#amount').value;
     let reason = document.querySelector('#reason').value;
     let message = document.querySelector('#message').value;
@@ -106,3 +118,38 @@ deductCurrency = (to, amount, reason, message) => {
             logout();
         });
 }
+
+fetch(baseUrl + '/api/v1/currency/leaderboard', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + localStorage.getItem('token')
+    }
+})
+.then(response => response.json())
+.then(result => {
+    result.data.currency.forEach(currency => {
+        user = { label: currency.firstname + ' ' + currency.lastname, value: currency.username}
+        users.push(user);
+    });
+})
+.catch(error => {
+    logout();
+});
+ 
+var input = document.getElementById("to");
+ 
+autocomplete({
+    input: input,
+    minLength: 2,
+    fetch: function(text, update) {
+        text = text.toLowerCase();
+        var suggestions = users.filter(n => n.label.toLowerCase().startsWith(text))
+        update(suggestions);
+    },
+    onSelect: function(item) {
+        input.value = item.label;
+        toUser = item.value;
+    },
+    emptyMsg: "No user found",
+});

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const autocomplete = require('autocompleter');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/stylesheets', express.static(__dirname + '/node_modules/normalize.css/'));
+app.use('/javascripts', express.static(__dirname + '/node_modules/autocompleter/'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

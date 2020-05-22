@@ -79,7 +79,7 @@ const getCurrencyId = (req, res) => {
 }
 
 const getLeaderboard = (req, res) => {
-    DefaultUser.find({}, 'firstname lastname amount').sort({amount: 'descending'}).exec((err, doc) => {
+    DefaultUser.find({}, 'username firstname lastname amount').sort({amount: 'descending'}).exec((err, doc) => {
         if (!err) {
             res.json({
                 status: 'success',

@@ -3,7 +3,6 @@ let btnConfirm = document.querySelector('.btn--confirm');
 const alert = document.querySelector('.alert');
 const alertText = document.querySelector('.alert__text');
 let users = [];
-let toUser;
 
 primus = Primus.connect(baseUrl, {
     reconnect: {
@@ -35,10 +34,6 @@ btnConfirm.addEventListener('click', () => {
 
     if (users.find(x => x.label === document.querySelector('#to').value)) {
         to = users.find(x => x.label).value;
-    }
-
-    if (toUser != null){
-        to = toUser;
     }
 
     let amount = document.querySelector('#amount').value;
@@ -149,7 +144,6 @@ autocomplete({
     },
     onSelect: function(item) {
         input.value = item.label;
-        toUser = item.value;
     },
     emptyMsg: "No user found",
 });

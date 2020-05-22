@@ -78,22 +78,20 @@ const getCurrencyId = (req, res) => {
     });
 }
 
-//move to user?
 const getLeaderboard = (req, res) => {
-    res.json({
-        status: 'success',
-        data: {
-            'currency': [{
-                    'id': 1,
-                    'username': 'Jens',
-                    'amount': 123
-                },
-                {
-                    'id': 2,
-                    'username': 'Mathilde',
-                    'amount': 321
+    DefaultUser.find({}, 'firstname lastname amount').sort({amount: 'descending'}).exec((err, doc) => {
+        if (!err) {
+            res.json({
+                status: 'success',
+                data: {
+                    'currency': doc
                 }
-            ]
+            });
+        } else {
+            res.json({
+                status: 'error',
+                message: 'Unable to find leaderboard'
+            });
         }
     });
 }
